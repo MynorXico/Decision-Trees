@@ -14,3 +14,13 @@ def class_probabilities(labels):
 def data_entropy(labeled_data):
     labels = [label for _, label in labeled_data]
     probabilities = class_probabilities(labels)
+
+# H = q1H(S1)+...+qmH(Sm)
+def partition_entropy(subsets):
+    """find the entropy from this partition of data into subsets
+    subsets is a list of lists of labeled data"""
+
+    total_count = sum(len(subset) for subset in subsets)
+
+    return sum(data_entropy(subset)*(len(subset)/total_count)
+               for subset in subsets)
